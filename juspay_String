@@ -1,0 +1,28 @@
+package Daily_Problem;
+
+import java.util.Scanner;
+public class JUSPAY_STRING {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        String  str=sc.nextLine();
+        char target[]= {'j','u','s','p','a','y'};
+        int count=0;
+        for(int i=0;i<str.length();i++)
+        {
+            char c=str.charAt(i);
+            int a=0;
+            for(int j=0;j<target.length;j++)
+            {
+                if(c==target[j])
+                {
+                    target[j]='/';
+                    a++;
+                    break;
+                }
+            }
+            if(a==0)
+                count++;
+        }
+        System.out.println(count);
+    }
+}
