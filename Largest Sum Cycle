@@ -1,0 +1,42 @@
+
+class Solution {
+    public long largesSumCycle(int N, int Edge[]) {
+        int count[] = new int[N];
+        for (int i = 0; i < N; i++) {
+            if (Edge[i] != -1)
+                count[Edge[i]]++;
+        }
+        Queue<Integer> q = new LinkedList<>();
+        boolean[] ss = new boolean[N];
+        for (int i = 0; i < N; i++) {
+            if (count[i] == 0) {
+                ss[i] = true;
+                q.add(i);
+            }
+        }
+        while (!q.isEmpty()) {
+            int num = q.poll();
+            if (Edge[num] == -1)
+                continue;
+            count[Edge[num]]--;
+            if (count[Edge[num]] == 0) {
+                ss[Edge[num]] = true;
+                q.add(Edge[num]);
+            }
+        }
+        long ans = -1;
+        for (int i = 0; i < N; i++) {
+            if (!ss[i]) {
+                long val = 0;
+                int st = i;
+                while (!ss[st]) {
+                    ss[st] = true;
+                    val += st;
+                    st = Edge[st];
+                }
+                ans = Math.max(ans, val);
+            }
+        }
+        return ans;
+    }
+}
